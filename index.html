@@ -32,6 +32,27 @@
         </div>
     </header>
 
+<h1 id="nombre_empresa"></h1>
+<p>
+  Dirección: <span id="direccion_empresa"></span><br>
+  Teléfono: <span id="telefono_empresa"></span><br>
+  Horario: <span id="horario_empresa"></span>
+</p>
+
+<h2>Productos</h2>
+<div id="productos"></div>
+
+<h2>Carrito</h2>
+<div id="carrito"></div>
+
+<div id="formulario" style="display:none;">
+  <h3>Datos para el pedido</h3>
+  Nombre: <input id="nombre"><br>
+  Teléfono: <input id="tel"><br>
+  Dirección: <input id="dir"><br>
+  <button onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
+</div>
+    
     <section class="hero" id="inicio">
         <div class="container">
             <div class="hero-content">
@@ -149,5 +170,92 @@
 
     <script src="db.js"></script>
     <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script>
+// Cambia si tu CSV está en otro lugar
+const rutaCSV = "datos_empresa.csv"; 
+
+let datosEmpresa = {};
+let productos = [];
+let carrito = [];
+
+function mostrarEmpresa() {
+  document.getElementById("nombre_empresa").textContent = datosEmpresa.nombre;
+  document.getElementById("direccion_empresa").textContent = datosEmpresa.direccion;
+  document.getElementById("telefono_empresa").textContent = datosEmpresa.telefono;
+  document.getElementById("horario_empresa").textContent = datosEmpresa.horario;
+}
+
+function mostrarProductos() {
+  let cont = document.getElementById("productos");
+  cont.innerHTML = "";
+  productos.forEach(prod => {
+    let div = document.createElement("div");
+    div.innerHTML = `
+      <img src="imagenes/${prod.imagen}" width="100"><br>
+      <strong>${prod.nombre}</strong><br>
+      Precio: $${prod.precio}<br>
+      <button onclick='agregarCarrito(${prod.id})'>Agregar</button>
+    `;
+    cont.appendChild(div);
+  });
+}
+
+function agregarCarrito(id) {
+  let prod = productos.find(p => p.id == id);
+  carrito.push(prod);
+  mostrarCarrito();
+}
+
+function mostrarCarrito() {
+  let cont = document.getElementById("carrito");
+  cont.innerHTML = "";
+  let total = 0;
+  carrito.forEach((prod, i) => {
+    total += Number(prod.precio);
+    cont.innerHTML += `
+      ${prod.nombre} - $${prod.precio} <button onclick="quitarDelCarrito(${i})">Quitar</button><br>
+    `;
+  });
+  cont.innerHTML += `<hr>Total: $${total}<br>`;
+  if(carrito.length > 0) cont.innerHTML += `<button onclick="mostrarFormulario()">Finalizar compra</button>`;
+}
+
+function quitarDelCarrito(i) {
+  carrito.splice(i,1);
+  mostrarCarrito();
+}
+
+function mostrarFormulario() {
+  document.getElementById("formulario").style.display = "block";
+}
+
+function enviarPedido() {
+  let nombre = document.getElementById("nombre").value;
+  let telefono = document.getElementById("tel").value;
+  let direccion = document.getElementById("dir").value;
+
+  let lista = carrito.map(p=>`${p.nombre} ($${p.precio})`).join(", ");
+  let total = carrito.reduce((acc,p)=>acc+Number(p.precio),0);
+
+  let mensaje = `Pedido de: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}%0AProductos: ${lista}%0ATotal: $${total}`;
+  let numero = datosEmpresa.telefono.replace(/[^0-9]/g, ""); // solo números
+  window.open(`https://wa.me/52${numero}?text=${mensaje}`,"_blank");
+}
+
+Papa.parse(rutaCSV, {
+  download: true,
+  header: true,
+  complete: function(results) {
+    results.data.forEach(fila => {
+      if(fila.tipo=="empresa") datosEmpresa = fila;
+      if(fila.tipo=="producto") productos.push(fila);
+    });
+    mostrarEmpresa();
+    mostrarProductos();
+  }
+});
+      </script>
+
 </body>
 </html>
