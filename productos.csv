@@ -1,0 +1,15 @@
+tipo,nombre,precio,descripcion,imagen,moneda,telefono_empresa,costo_envio,categoria,eslogan,sobre_nosotros,direccion,telefono,email,facebook,instagram,twitter,horario_lunes_viernes,horario_sabado_domingo,imagen_cabecera,imagen_nosotros
+config,Dulce Vida,,,,CUP,5358707434,50,,Las Panetelas más deliciosas de la ciudad,En Dulce Vida nos apasiona crear las mejores Panetelas utilizando ingredientes frescos y de la más alta calidad. Nuestro compromiso es ofrecer una experiencia inolvidable.,"Calle 7 #5 e/ 2 y 4, Santa Lucía, Colombia, Las Tunas, Cuba.",(+53) 58707434,rafaelzf1989@gmail.com,https://www.facebook.com/share/16zJJFoFp1/,,,Lunes a Viernes: 9am - 8pm,Sábado y Domingo: 12pm - 8pm,https://file.garden/aEX2yhToiQk-s_Qq/Dulce%20Vida/IMG_COM_202507301021340510.jpg,https://file.garden/aEX2yhToiQk-s_Qq/Dulce%20Vida/cabecera%20cocinero.jpeg
+categoria,Panetelas,,,,,,,,,,,,,,,,,,,
+categoria,Otros,,,,,,,,,,,,,,,,,,,
+categoria,,,,,,,,,,,,,,,,,,,,
+categoria,,,,,,,,,,,,,,,,,,,,
+producto,Panetela Clásica,3500,Decoración tradicional con merengues de colores y grageas.,https://file.garden/aEX2yhToiQk-s_Qq/Dulce%20Vida/clasica.png,CUP,5358707434,50,Panetelas,,,,,,,,,,,,
+producto,Panetela de Chocolate,3800,Con cubierta y relleno de chocolate y grageas decorativas.,https://file.garden/aEX2yhToiQk-s_Qq/Dulce%20Vida/chocolate.png,CUP,5358707434,50,Panetelas,,,,,,,,,,,,
+producto,Panetela Especial,4300,"puedes escoger entre estos rellenos
+- Leche Condensada
+- Dulce de Leche
+- Crema de Vainilla
+- Crema de Fresas
+Rellena y cubierta con crema personalizada.",https://file.garden/aEX2yhToiQk-s_Qq/Dulce%20Vida/especial%201.png,CUP,5358707434,50,Panetelas,,,,,,,,,,,,
+producto,La Raya,200,Pipetas para perros,https://file.garden/aEX2yhToiQk-s_Qq/Dulce%20Vida/FB_IMG_1753936262436.jpg,CUP,5358707434,50,Otros,,,,,,,,,,,,
